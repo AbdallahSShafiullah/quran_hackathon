@@ -44,7 +44,7 @@ export default function Player({ backend }) {
         setStatusMessage(`Loading ${chapterName} — Verse ${currentVerse}...`)
         try {
             const res = await fetch(
-                `${backend}/api/audio?chapter=${currentChapter}&verse=${currentVerse}&reciter=${reciterId}`
+                `https://quran-hackathon.onrender.com/api/audio?chapter=${currentChapter}&verse=${currentVerse}&reciter=${reciterId}`
             )
             const data = await res.json()
             if (data.audio_url) {

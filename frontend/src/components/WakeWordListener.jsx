@@ -200,7 +200,7 @@ export default function WakeWordListener({ backend }) {
 
     let intentRes
     try {
-      const res = await fetch(`${backend}/api/intent`, {
+      const res = await fetch("https://quran-hackathon.onrender.com/api/intent", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ transcript, chapter: currentChapter, verse: currentVerse }),
@@ -224,7 +224,7 @@ export default function WakeWordListener({ backend }) {
         const v = target?.verse ?? currentVerse
         setStatusMessage(`Fetching tafsir for ${ch}:${v}...`)
         try {
-          const r = await fetch(`${backend}/api/tafsir?chapter=${ch}&verse=${v}`)
+          const r = await fetch(`https://quran-hackathon.onrender.com/api/tafsir?chapter=${ch}&verse=${v}`)
           const data = await r.json()
           setDisplayText(data.text, 'tafsir', data.verse_key)
           // If the tafsir covers a range, mention the actual verse it's stored under
@@ -247,7 +247,7 @@ export default function WakeWordListener({ backend }) {
         const v = target?.verse ?? currentVerse
         setStatusMessage(`Fetching translation for ${ch}:${v}...`)
         try {
-          const r = await fetch(`${backend}/api/translation?chapter=${ch}&verse=${v}`)
+          const r = await fetch(`https://quran-hackathon.onrender.com/api/translation?chapter=${ch}&verse=${v}`)
           const data = await r.json()
           setDisplayText(data.text, 'translation', data.verse_key)
           await speakSafe(`Translation: ${data.text}`)

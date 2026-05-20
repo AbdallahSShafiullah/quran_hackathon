@@ -13,6 +13,16 @@ const MicOffIcon = () => (
     </svg>
 )
 
+const COMMANDS = [
+    { cmd: '"Hey Huda, translate this verse"',  desc: 'English translation of the current ayah' },
+    { cmd: '"Hey Huda, explain this verse"',    desc: 'Ibn Kathir tafsir for the current ayah'  },
+    { cmd: '"Hey Huda, go to chapter 36"',      desc: 'Jump to any surah by name or number'     },
+    { cmd: '"Hey Huda, verse 12"',              desc: 'Jump to a specific ayah'                 },
+    { cmd: '"Hey Huda, next / previous"',       desc: 'Move between verses'                     },
+    { cmd: '"Hey Huda, pause / resume"',        desc: 'Playback control'                        },
+    { cmd: '"Hey Huda, repeat"',                desc: 'Replay the current verse'                },
+]
+
 export default function MicControl() {
     const { micEnabled, setMicEnabled, setStatusMessage, wakeWordDetected, isProcessingVoice } = useHudaStore()
 
@@ -163,6 +173,44 @@ export default function MicControl() {
                     style={{ width: '100%', height: '100%', display: 'block' }}
                 />
             </div>
+
+            {/* Supported commands */}
+            <div style={{
+                width: '100%',
+                background: 'var(--bg-surface)',
+                border: '0.5px solid var(--border-subtle)',
+                borderRadius: '14px',
+                padding: '18px 22px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+            }}>
+                <div className="section-label" style={{ marginBottom: '2px' }}>Supported Commands</div>
+
+                {COMMANDS.map(({ cmd, desc }) => (
+                    <div key={cmd} style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
+            <span style={{
+                fontFamily: 'monospace',
+                fontSize: '12px',
+                color: 'var(--gold)',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+            }}>
+              {cmd}
+            </span>
+                        <span style={{
+                            fontSize: '12px',
+                            color: 'var(--text-muted)',
+                            borderLeft: '1px solid var(--border-subtle)',
+                            paddingLeft: '12px',
+                            lineHeight: 1.5,
+                        }}>
+              {desc}
+            </span>
+                    </div>
+                ))}
+            </div>
+
         </div>
     )
 }

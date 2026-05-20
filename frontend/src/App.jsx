@@ -10,41 +10,46 @@ import MicControl from './components/MicControl'
 const BACKEND = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
 
 export default function App() {
-  const { setChapters } = useHudaStore()
+    const { setChapters } = useHudaStore()
 
-  useEffect(() => {
-    // Load chapter list on mount
-    fetch(`${BACKEND}/api/chapters`)
-      .then(r => r.json())
-      .then(data => setChapters(data.chapters))
-      .catch(console.error)
-  }, [])
+    useEffect(() => {
+        fetch(`${BACKEND}/api/chapters`)
+            .then(r => r.json())
+            .then(data => setChapters(data.chapters))
+            .catch(console.error)
+    }, [])
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-start p-6 gap-6">
-      {/* Header */}
-      <div className="text-center mt-4">
-        <h1 className="text-4xl font-bold text-huda-gold">هُدى</h1>
-        <p className="text-huda-light opacity-70 text-sm mt-1">Huda — Voice Quran Companion</p>
-      </div>
+    return (
+        <div className="app-shell">
+            {/* ── Top bar ── */}
+            <header className="topbar">
+                <div className="brand">
+                    <span className="brand-ar">هُدى</span>
+                    <span className="brand-en">Voice Quran Companion</span>
+                </div>
+                <StatusBar />
+            </header>
 
-      {/* Status Bar */}
-      <StatusBar />
+            <div className="geo-divider" />
 
-      {/* Mic Control — toggle + waveform visualizer */}
-      <MicControl />
+            {/* ── Main two-column layout ── */}
+            <main className="main-grid">
 
-      {/* Chapter Selector */}
-      <ChapterSelector backend={BACKEND} />
+                {/* Left: controls */}
+                <aside className="left-panel">
+                    <ChapterSelector backend={BACKEND} />
+                    <Player backend={BACKEND} />
+                </aside>
 
-      {/* Player */}
-      <Player backend={BACKEND} />
+                {/* Right: mic + response */}
+                <section className="right-panel">
+                    <MicControl />
+                    <ResponseDisplay />
+                </section>
+            </main>
 
-      {/* Response Display (tafsir / translation) */}
-      <ResponseDisplay />
-
-      {/* Wake Word Listener — always mounted, invisible */}
-      <WakeWordListener backend={BACKEND} />
-    </div>
-  )
+            {/* Invisible — always mounted */}
+            <WakeWordListener backend={BACKEND} />
+        </div>
+    )
 }

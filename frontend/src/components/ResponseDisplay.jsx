@@ -2,22 +2,53 @@ import React from 'react'
 import useHudaStore from '../store/useHudaStore'
 
 export default function ResponseDisplay() {
-  const { displayText, displayMode, displayVerseKey } = useHudaStore()
+    const { displayText, displayMode, displayVerseKey } = useHudaStore()
 
-  if (!displayText || displayMode === 'player') return null
+    if (!displayText || displayMode === 'player') return null
 
-  const label = displayMode === 'tafsir' ? 'Tafsir' : 'Translation'
-  const borderColor = displayMode === 'tafsir' ? 'border-huda-gold' : 'border-blue-400'
+    const isTabsir = displayMode === 'tafsir'
+    const label = isTabsir ? 'Tafsir' : 'Translation'
 
-  return (
-    <div className={`w-full max-w-md bg-huda-dark border ${borderColor} rounded-2xl p-5`}>
-      <div className="flex justify-between items-center mb-3">
-        <span className="text-huda-gold text-sm font-semibold uppercase tracking-wide">{label}</span>
-        {displayVerseKey && (
-          <span className="text-huda-light opacity-50 text-xs">Verse {displayVerseKey}</span>
-        )}
-      </div>
-      <p className="text-huda-light leading-relaxed text-sm">{displayText}</p>
-    </div>
-  )
+    return (
+        <div className="response-panel" style={{ maxWidth: '100%' }}>
+
+            {/* Tab label */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', gap: '8px' }}>
+          <span
+              className="pill-btn"
+              style={{
+                  background: !isTabsir ? 'var(--gold-dim)' : 'transparent',
+                  borderColor: !isTabsir ? 'var(--gold-border)' : 'var(--border-mid)',
+                  color: !isTabsir ? 'var(--gold)' : 'var(--text-secondary)',
+                  cursor: 'default',
+              }}
+          >
+            Translation
+          </span>
+                    <span
+                        className="pill-btn"
+                        style={{
+                            background: isTabsir ? 'var(--gold-dim)' : 'transparent',
+                            borderColor: isTabsir ? 'var(--gold-border)' : 'var(--border-mid)',
+                            color: isTabsir ? 'var(--gold)' : 'var(--text-secondary)',
+                            cursor: 'default',
+                        }}
+                    >
+            Tafsir
+          </span>
+                </div>
+
+                {displayVerseKey && (
+                    <span className="ayah-badge">Verse {displayVerseKey}</span>
+                )}
+            </div>
+
+            {/* Divider */}
+            <div className="geo-divider" />
+
+            {/* Content */}
+            <p className="response-body">{displayText}</p>
+        </div>
+    )
 }

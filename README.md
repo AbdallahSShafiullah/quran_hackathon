@@ -7,7 +7,7 @@
 *Say "Hey Huda" to navigate, translate, and understand the Quran — hands-free.*
 
 [![Quran Foundation Hackathon](https://img.shields.io/badge/Quran%20Foundation-Hackathon%202026-C9952A?style=flat-square)](https://quran.com)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20App-1E3A28?style=flat-square)](https://quran-hackathon.onrender.com)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20App-1E3A28?style=flat-square)](https://quran-hackathon-seven.vercel.app/)
 
 </div>
 
@@ -23,9 +23,9 @@ Huda removes that friction entirely. Open the app, enable the microphone, and in
 
 ## Demo
 
-> 📹 **[Watch the 2-minute demo video](#)**
+> 📹 **[Watch the 2-minute demo video](https://www.loom.com/share/0e8f6d5ebc7742d7bddc131318af4c32)**
 
-Or try it live: **[quran-hackathon.onrender.com](https://quran-hackathon.onrender.com)**
+Or try it live: **[quran-hackathon.onrender.com](https://quran-hackathon-seven.vercel.app/)**
 
 ---
 

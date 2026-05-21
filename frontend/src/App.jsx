@@ -6,14 +6,15 @@ import ResponseDisplay from './components/ResponseDisplay'
 import ChapterSelector from './components/ChapterSelector'
 import StatusBar from './components/StatusBar'
 import MicControl from './components/MicControl'
+import StreakBadge from './components/StreakBadge'
 
-const BACKEND = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
+const BACKEND = import.meta.env.VITE_BACKEND_URL || 'https://quran-hackathon.onrender.com'
 
 export default function App() {
     const { setChapters } = useHudaStore()
 
     useEffect(() => {
-        fetch(`${BACKEND}/api/chapters`)
+        fetch(`https://quran-hackathon.onrender.com/api/chapters`)
             .then(r => r.json())
             .then(data => setChapters(data.chapters))
             .catch(console.error)
@@ -27,7 +28,10 @@ export default function App() {
                     <span className="brand-ar">هُدى</span>
                     <span className="brand-en">Voice Quran Companion</span>
                 </div>
-                <StatusBar />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <StreakBadge />
+                    <StatusBar />
+                </div>
             </header>
 
             <div className="geo-divider" />
